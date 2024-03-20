@@ -12,12 +12,15 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const apiKey = import.meta.env.VITE_API_KEY;
-const apiUrl = import.meta.env.VITE_API_URL;
+const baseUrl = import.meta.env.VITE_API_URL;
 
 const App = () => {
+  const [category,setCategory] = useState("general")
   const [user, setUser] = useState(null);
   const [newsData, setNewsData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  const apiUrl = `${baseUrl}${category}&apiKey=${apiKey}`
   
   // handling favourite buton using firebase db
    const addToFavorites= async(newsItem) =>{
@@ -62,7 +65,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${apiUrl}${apiKey}`);
+        const response = await fetch(apiUrl);
         const data = await response.json();
         setNewsData(data.articles);
         setIsLoading(false);
@@ -71,17 +74,18 @@ const App = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [category]);
 
   return (
     <Routes>
-      <Route path="/register" element={<Register />} />
+      <Route path="/register" element={<Register setUser={setUser} />} />
       <Route path="/login" element={<Login />} />
       <Route
         path="/*"
         element={
           user ? (
             <HomePage
+              setCategory={setCategory}
               newsData={newsData}
               handleAddToFavorites={addToFavorites}
               isLoading={isLoading}

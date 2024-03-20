@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Register = () => {
+const googleProvider = new GoogleAuthProvider();
+
+const Register = ({ setUser }) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,6 +42,20 @@ const Register = () => {
     }
   };
 
+  // siignup with google
+  const signupWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log(result.user, "user");
+      toast.success("Signed in with Google successfully!");
+      setTimeout(() => {
+        navigate("/");
+      }, 1200);
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+      toast.error("Error signing in with Google!");
+    }
+  };
   return (
     <div className="main">
       <ToastContainer
@@ -80,6 +99,8 @@ const Register = () => {
           minLength={6}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+        <br />
+        <button onClick={signupWithGoogle}>SignIn With Google</button>
         <button onClick={(e) => signUp(e)}>Register</button>
         <Link className="link" to="/login">
           Already have an account? Login Here.{" "}

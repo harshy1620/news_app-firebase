@@ -3,10 +3,10 @@ import News from "../components/News";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const HomePage = ({ newsData, isLoading, handleAddToFavorites }) => {
+const HomePage = ({ newsData, isLoading, handleAddToFavorites,setCategory }) => {
   return (
     <>
-      <Navbar />
+      <Navbar setCategory={setCategory}/>
       <News newsData={newsData} isLoading={isLoading} handleAddToFavorites={handleAddToFavorites}/>
       <Footer />
     </>

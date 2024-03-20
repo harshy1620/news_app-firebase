@@ -46,7 +46,6 @@ const Favourites = () => {
         const favoriteRef = doc(db, "users", user.uid, "favorites", favoriteId);
         await deleteDoc(favoriteRef);
         toast.success("Favorite news deleted successfully");
-        
         // Update the favorites state after deletion
         const updatedFavorites = favorites.filter(
           (fav) => fav.id !== favoriteId
