@@ -13,13 +13,13 @@ Welcome to the News App project! This ReactJS project is set up with Vite, utili
 ## Features
 
 1. **User Authentication:**
-   - Users can sign up or log in using Firebase authentication.
+   - Users can sign up or log in using Firebase authentication and SignIn with google is also available.
 
 2. **Top News Display:**
    - Fetches and displays top news articles from a News API.
 
 3. **Favorite News:**
-   - Users can mark articles as favorites, storing them in the Firebase database.
+   - Users can mark articles as favorites( as well delete functionalty is also available), storing them in the Firebase database.
 
 4. **News Details:**
    - Clicking on a news card opens a detailed view with an option to view the full article.
@@ -27,6 +27,7 @@ Welcome to the News App project! This ReactJS project is set up with Vite, utili
 5. **Navigation:**
    - Navbar with a logo for easy navigation.
    - Logout button for user convenience.
+   - Categorises are also mentioned on Navbar(like gaming,technology etc)
 
 ## Installation
 
@@ -45,7 +46,7 @@ Welcome to the News App project! This ReactJS project is set up with Vite, utili
 4. Set up environment variables:
    i) Create a .env file in the root directory of the project and add these variables with values in it:
       - VITE_API_KEY=your-key-here (generate this from https://newsapi.org)
-      - VITE_API_URL=https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=
+      - VITE_API_URL=https://newsapi.org/v2/top-headlines?country=in&category=
 
 5.Run the app:
 - npm run dev
@@ -55,6 +56,8 @@ Welcome to the News App project! This ReactJS project is set up with Vite, utili
  - Sign up or log in to access the top news.
  - Click on the heart icon to save a news article to 
      your favorites.
+ -   Click on the delete icon in favourite section to delete a  particular news article 
+      from your favorites.
  - View detailed news information by clicking on a 
     news card.
  - Click on the "Full Article" link to read the 
